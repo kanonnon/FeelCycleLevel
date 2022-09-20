@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand navbar-light bg-light mb-3">
+      <a href="#" class="navbar-brand">FeelCycleLevel</a>
+    </nav>
+  </header>
+
+  <div class="row">
+    <div id="main" class="col-10 mx-auto">
+      <div id="filtering-button">
+        <label>filtering</label>
+        <select id="filtering-select">
+          <option value="all">All</option>
+          <option value="bb1">BB1</option>
+          <option value="bb2">BB2</option>
+          <option value="bb3">BB3</option>
+          <option value="bsb">BSB</option>
+          <option value="bsl">BSL</option>
+          <option value="bsw">BSW</option>
+        </select>
+      </div>
+      <div id="ranking">
+        <table id="mytable" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>PROGRAM</th>
+              <th>Leg&Hip</th>
+              <th>Waist</th>
+              <th>Back&Arm</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="table-value">
+          </tbody>
+        </table>
+        <table id="table-template">
+          <tr class="table-tr" id="table-template-tr">
+            <td class="table-program-name"></td>
+            <td class="table-leg"></td>
+            <td class="table-waist"></td>
+            <td class="table-arm"></td>
+            <td class="table-total"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body row">
+          <form id="program-form" class="mb-5 col-10 mx-auto">
+            <div class="form-group row" id="form-program-name">
+              <label class="col-6 col-form-label">PROGRAM</label>
+              <input type="text" id="add-program-name" class="form-control col-6" required>
+            </div>
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Leg&Hip</label>
+              <select id="add-leg" class="form-control col-6">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Waist</label>
+              <select id="add-waist" class="form-control col-6">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="form-group row">
+              <label class="col-6 col-form-label">Back&Arm</label>
+              <select id="add-arm" class="form-control col-6">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="row">
+              <button type="submit" id="form-button" class="btn btn-primary col-6 offset-6">送信</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAMbqcQ2O9bYoUhEkeqqtYuwhmaHx0VbC0",
+      authDomain: "feelcycle-df728.firebaseapp.com",
+      databaseURL: "https://feelcycle-df728-default-rtdb.firebaseio.com",
+      projectId: "feelcycle-df728",
+      storageBucket: "feelcycle-df728.appspot.com",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>
